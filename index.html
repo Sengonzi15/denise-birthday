@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 29th Birthday Denise! 👑✨</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;600;800&family=Sacramento&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background Music Audio -->
+  <!-- Rename your audio file to assets/birthday_song.mp3 or update the src accordingly -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="./assets/birthday_song.mp3" type="audio/mpeg">
+    <source src="./assets/birthday_song.ogg" type="audio/ogg">
+    Your browser does not support audio playback.
+  </audio>
+
+  <!-- Canvas elements for FX -->
+  <canvas id="sparkle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- WOW Intro Gift Box Overlay -->
+  <div id="gift-modal" class="gift-modal-overlay">
+    <div class="gift-wrapper">
+      <div class="gift-box" id="gift-box">
+        <div class="gift-lid" id="gift-lid">
+          <div class="ribbon-bow"></div>
+        </div>
+        <div class="gift-body">
+          <div class="ribbon-vertical"></div>
+          <div class="ribbon-horizontal"></div>
+        </div>
+      </div>
+      <h2 class="gift-prompt">🎁 A special delivery from Uganda to Italy...<br><span>Tap the gift box to open your surprise!</span></h2>
+    </div>
+  </div>
+
+  <!-- Main Website Content (Hidden initially) -->
+  <main id="main-content" class="content-hidden">
+    
+    <!-- Audio Floating Controller -->
+    <div class="audio-control-bar">
+      <button id="music-toggle-btn" class="glow-btn">🎵 Pause Music</button>
+    </div>
+
+    <!-- LEVEL 1: HERO SPOTLIGHT & COUNTDOWN -->
+    <section class="level-section" id="level-1">
+      <div class="badge">LEVEL 01 • CELEBRATION STARTS</div>
+      <h1 class="hero-title">Happy 29th Birthday, <br><span class="highlight-purple">Denise!</span> 👑✨</h1>
+      <p class="hero-subtext">Crafted with infinite love by your brother <strong>Davies</strong></p>
+      
+      <div class="countdown-card glass-panel">
+        <h3>Countdown to Denise's Big 30th Chapter ⏳</h3>
+        <div class="countdown-grid">
+          <div class="time-unit"><span id="days">00</span><label>Days</label></div>
+          <div class="time-unit"><span id="hours">00</span><label>Hours</label></div>
+          <div class="time-unit"><span id="minutes">00</span><label>Mins</label></div>
+          <div class="time-unit"><span id="seconds">00</span><label>Secs</label></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVEL 2: CHARACTER & SPOTLIGHT GALLERY -->
+    <section class="level-section" id="level-2">
+      <div class="badge">LEVEL 02 • THE SHINING STAR</div>
+      <h2 class="section-title">Bold, Loving & Unstoppable</h2>
+      <div class="traits-grid">
+        <div class="trait-card glass-panel">
+          <div class="icon">💖</div>
+          <h3>Extremely Loving</h3>
+          <p>Your compassion and warmth extend across oceans. Home in Uganda feels a little quieter without your radiant laughter.</p>
+        </div>
+        <div class="trait-card glass-panel">
+          <div class="icon">🔥</div>
+          <h3>Ever Bold & Confident</h3>
+          <p>You speak your mind with truth, grace, and courage. Never afraid to shine and stand tall in every room you enter.</p>
+        </div>
+        <div class="trait-card glass-panel">
+          <div class="icon">🌍</div>
+          <h3>Deeply Loved & Missed</h3>
+          <p>A true friend to many. We miss your presence dearly and cannot wait for your next trip back home to Kampala!</p>
+        </div>
+      </div>
+
+      <!-- Real Asset Image Gallery -->
+      <div class="polaroid-row">
+        <div class="polaroid-card">
+          <img src="./assets/cool_girl.png" alt="Cool Denise" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/3A0E4B/FFD700?text=Denise+Cool+Girl'" />
+          <div class="caption">Coolest Vibe 💜</div>
+        </div>
+        <div class="polaroid-card">
+          <img src="./assets/smile_white.png" alt="Denise Smiling" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/3A0E4B/FFD700?text=Denise+Smiling'" />
+          <div class="caption">Radiant Smile ✨</div>
+        </div>
+        <div class="polaroid-card">
+          <img src="./assets/bad_cool_girl.png" alt="Bad Cool Girl Denise" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/3A0E4B/FFD700?text=Bold+Style'" />
+          <div class="caption">Pure Confidence 😎</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVEL 3: VIDEO MEMORY HUB -->
+    <section class="level-section" id="level-3">
+      <div class="badge">LEVEL 03 • LIVE IN MOTION</div>
+      <h2 class="section-title">Denise In Action 🎬</h2>
+      <div class="video-container glass-panel">
+        <video controls poster="./assets/tropical.png">
+          <source src="./assets/Denise playing.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="video-caption">Capturing your joyous energy and playfulness!</p>
+      </div>
+    </section>
+
+    <!-- LEVEL 4: FAMILY & SIBLING VAULT -->
+    <section class="level-section" id="level-4">
+      <div class="badge">LEVEL 04 • FAMILY MEMORIES</div>
+      <h2 class="section-title">Uganda to Italy Connection 🇺🇬 ✈️ 🇮🇹</h2>
+      
+      <div class="album-grid">
+        <div class="album-card glass-panel">
+          <img src="./assets/xmas_fam.JPG" alt="Family Christmas" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x400/3A0E4B/FFD700?text=Family+Christmas'" />
+          <div class="album-info">
+            <h3>Family Together</h3>
+            <p>Unforgettable moments with everyone at home.</p>
+          </div>
+        </div>
+        <div class="album-card glass-panel">
+          <img src="./assets/xmas_siblings_mum.JPG" alt="Siblings & Mum" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x400/3A0E4B/FFD700?text=Siblings+%26+Mum'" />
+          <div class="album-info">
+            <h3>Mum & The Squad</h3>
+            <p>Surrounded by endless family love and support.</p>
+          </div>
+        </div>
+        <div class="album-card glass-panel">
+          <img src="./assets/xmas_siblings.JPG" alt="Siblings" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x400/3A0E4B/FFD700?text=Siblings+Xmas'" />
+          <div class="album-info">
+            <h3>Sibling Bonding</h3>
+            <p>Denise, Diana, Dominic, & Davies!</p>
+          </div>
+        </div>
+        <div class="album-card glass-panel">
+          <img src="./assets/xmas_denise_diana.JPG" alt="Denise and Diana" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x400/3A0E4B/FFD700?text=Denise+%26+Diana'" />
+          <div class="album-info">
+            <h3>Sisters Dynamic</h3>
+            <p>Unbreakable sisterly warmth and style.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEVEL 5: VIRTUAL CAKE & PERSONAL LETTER FROM DAVIES -->
+    <section class="level-section" id="level-5">
+      <div class="badge">LEVEL 05 • THE GRAND FINALE</div>
+      
+      <!-- Virtual Cake Container -->
+      <div class="cake-box glass-panel">
+        <h2 class="cake-title">Make A Wish & Blow Out The Candle! 🎂</h2>
+        <div class="cake-wrapper" id="cake-wrapper">
+          <div class="candle" id="candle">
+            <div class="flame" id="flame"></div>
+          </div>
+          <div class="cake-tier tier-top"></div>
+          <div class="cake-tier tier-bottom"></div>
+        </div>
+        <p id="cake-status-text">Click the candle flame to blow it out!</p>
+      </div>
+
+      <!-- Letter from Davies -->
+      <div class="letter-box glass-panel">
+        <div class="stamp">UG ✈️ IT</div>
+        <h3>From Your Brother Davies ✍️</h3>
+        <p>Denise,</p>
+        <p>Happy 29th Birthday! You gave me such a meaningful and memorable gift on my birthday, and even though we are thousands of miles apart today, I wanted to build something tailored, unique, and filled with memories just for you.</p>
+        <p>You are a pillar of strength, care, and bold confidence in our family. Keep conquering Italy, keep shining your light, and know that we are cheering for you always back home in Uganda.</p>
+        <p class="letter-signature">With lots of love,<br><strong>Davies Marvin Sengonzi</strong></p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Designed & Built with HTML/CSS/JS by <strong>Davies</strong> for Denise's 29th Birthday • 2026</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
