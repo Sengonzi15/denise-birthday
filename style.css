@@ -14,6 +14,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg-dark);
@@ -44,6 +48,12 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
   padding: 2rem;
   margin-top: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(138, 43, 226, 0.4);
 }
 
 /* WOW GIFT BOX OVERLAY */
@@ -70,6 +80,36 @@ body {
 .gift-wrapper {
   text-align: center;
   cursor: pointer;
+}
+
+/* Dancing Mascot */
+.mascot-container {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mascot-dance {
+  font-size: 3.5rem;
+  animation: mascotBounce 1.2s infinite ease-in-out alternate;
+}
+
+@keyframes mascotBounce {
+  0% { transform: translateY(0) rotate(-5deg); }
+  100% { transform: translateY(-15px) rotate(5deg); }
+}
+
+.mascot-speech {
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid var(--gold-accent);
+  color: var(--gold-accent);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
 .gift-box {
@@ -171,12 +211,23 @@ body {
   transform: scale(1.05);
 }
 
-/* LEVEL SECTIONS */
+/* LEVEL SECTIONS & SCROLL REVEAL ANIMATIONS */
 .level-section {
   max-width: 1000px;
   margin: 0 auto 4rem;
   padding: 2rem 1.5rem;
   text-align: center;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .badge {
@@ -208,6 +259,25 @@ body {
   font-size: 1.2rem;
   color: var(--text-muted);
   margin-bottom: 2rem;
+}
+
+/* Scroll Down Indicator */
+.scroll-indicator {
+  margin-top: 3rem;
+  color: var(--gold-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.scroll-arrow {
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  animation: bounceArrow 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
 
 /* Countdown */
@@ -316,6 +386,24 @@ body {
 .video-caption {
   margin-top: 1rem;
   color: var(--text-muted);
+}
+
+/* Flowers & Chocolates Gifts Grid */
+.gifts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.gift-item-card .gift-icon {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+}
+
+.gift-item-card h3 {
+  color: var(--gold-accent);
+  margin-bottom: 0.5rem;
 }
 
 /* Family Album */

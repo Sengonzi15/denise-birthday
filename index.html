@@ -12,21 +12,27 @@
 </head>
 <body>
 
-  <!-- Background Music Audio -->
-  <!-- Rename your audio file to assets/birthday_song.mp3 or update the src accordingly -->
-  <audio id="bg-music" loop preload="auto">
+  <!-- Dual Audio Playlist for Seamless Seamless Transition -->
+  <audio id="bg-music-1" preload="auto">
     <source src="./assets/birthday_song.mp3" type="audio/mpeg">
-    <source src="./assets/birthday_song.ogg" type="audio/ogg">
-    Your browser does not support audio playback.
+  </audio>
+  <audio id="bg-music-2" preload="auto">
+    <source src="./assets/birthday-song2.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Canvas elements for FX -->
   <canvas id="sparkle-canvas"></canvas>
   <canvas id="confetti-canvas"></canvas>
 
-  <!-- WOW Intro Gift Box Overlay -->
+  <!-- WOW Intro Gift Box Overlay with Dancing Mascot -->
   <div id="gift-modal" class="gift-modal-overlay">
     <div class="gift-wrapper">
+      <!-- Animated Party Mascot -->
+      <div class="mascot-container">
+        <div class="mascot-dance">🐻🎉</div>
+        <div class="mascot-speech">Hey Denise! A special surprise is inside!</div>
+      </div>
+
       <div class="gift-box" id="gift-box">
         <div class="gift-lid" id="gift-lid">
           <div class="ribbon-bow"></div>
@@ -48,9 +54,9 @@
       <button id="music-toggle-btn" class="glow-btn">🎵 Pause Music</button>
     </div>
 
-    <!-- LEVEL 1: HERO SPOTLIGHT & COUNTDOWN -->
-    <section class="level-section" id="level-1">
-      <div class="badge">LEVEL 01 • CELEBRATION STARTS</div>
+    <!-- SECTION 1: HERO SPOTLIGHT & COUNTDOWN -->
+    <section class="level-section reveal-on-scroll" id="section-1">
+      <div class="badge">CELEBRATION STARTS</div>
       <h1 class="hero-title">Happy 29th Birthday, <br><span class="highlight-purple">Denise!</span> 👑✨</h1>
       <p class="hero-subtext">Crafted with infinite love by your brother <strong>Davies</strong></p>
       
@@ -63,11 +69,17 @@
           <div class="time-unit"><span id="seconds">00</span><label>Secs</label></div>
         </div>
       </div>
+
+      <!-- Scroll Down Indicator -->
+      <div class="scroll-indicator">
+        <p>Scroll down to explore your day ✨</p>
+        <div class="scroll-arrow">👇</div>
+      </div>
     </section>
 
-    <!-- LEVEL 2: CHARACTER & SPOTLIGHT GALLERY -->
-    <section class="level-section" id="level-2">
-      <div class="badge">LEVEL 02 • THE SHINING STAR</div>
+    <!-- SECTION 2: CHARACTER & SPOTLIGHT GALLERY -->
+    <section class="level-section reveal-on-scroll" id="section-2">
+      <div class="badge">THE SHINING STAR</div>
       <h2 class="section-title">Bold, Loving & Unstoppable</h2>
       <div class="traits-grid">
         <div class="trait-card glass-panel">
@@ -104,12 +116,12 @@
       </div>
     </section>
 
-    <!-- LEVEL 3: VIDEO MEMORY HUB -->
-    <section class="level-section" id="level-3">
-      <div class="badge">LEVEL 03 • LIVE IN MOTION</div>
+    <!-- SECTION 3: VIDEO MEMORY HUB -->
+    <section class="level-section reveal-on-scroll" id="section-3">
+      <div class="badge">LIVE IN MOTION</div>
       <h2 class="section-title">Denise In Action 🎬</h2>
       <div class="video-container glass-panel">
-        <video controls poster="./assets/tropical.png">
+        <video id="denise-video" controls muted poster="./assets/tropical.png">
           <source src="./assets/Denise playing.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -117,9 +129,27 @@
       </div>
     </section>
 
-    <!-- LEVEL 4: FAMILY & SIBLING VAULT -->
-    <section class="level-section" id="level-4">
-      <div class="badge">LEVEL 04 • FAMILY MEMORIES</div>
+    <!-- SECTION 4: FLOWERS & CHOCOLATES SPECIAL GIFT -->
+    <section class="level-section reveal-on-scroll" id="section-4">
+      <div class="badge">SPECIAL DELIVERY</div>
+      <h2 class="section-title">Flowers & Chocolates For You 💐🍫</h2>
+      <div class="gifts-grid">
+        <div class="gift-item-card glass-panel">
+          <div class="gift-icon">🌹🌸🌺</div>
+          <h3>Eternal Birthday Bouquet</h3>
+          <p>Fresh purple orchids and crimson roses, sent with love from Kampala straight to your heart in Italy.</p>
+        </div>
+        <div class="gift-item-card glass-panel">
+          <div class="gift-icon">🍫🍬✨</div>
+          <h3>Artisan Chocolates</h3>
+          <p>Sweet treats to celebrate sweet 29 years! May your year ahead be as delightful and rich as these fine chocolates.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: FAMILY & SIBLING VAULT -->
+    <section class="level-section reveal-on-scroll" id="section-5">
+      <div class="badge">FAMILY MEMORIES</div>
       <h2 class="section-title">Uganda to Italy Connection 🇺🇬 ✈️ 🇮🇹</h2>
       
       <div class="album-grid">
@@ -154,9 +184,9 @@
       </div>
     </section>
 
-    <!-- LEVEL 5: VIRTUAL CAKE & PERSONAL LETTER FROM DAVIES -->
-    <section class="level-section" id="level-5">
-      <div class="badge">LEVEL 05 • THE GRAND FINALE</div>
+    <!-- SECTION 6: VIRTUAL CAKE & PERSONAL LETTER FROM DAVIES -->
+    <section class="level-section reveal-on-scroll" id="section-6">
+      <div class="badge">THE GRAND FINALE</div>
       
       <!-- Virtual Cake Container -->
       <div class="cake-box glass-panel">
@@ -176,9 +206,10 @@
         <div class="stamp">UG ✈️ IT</div>
         <h3>From Your Brother Davies ✍️</h3>
         <p>Denise,</p>
-        <p>Happy 29th Birthday! You gave me such a meaningful and memorable gift on my birthday, and even though we are thousands of miles apart today, I wanted to build something tailored, unique, and filled with memories just for you.</p>
-        <p>You are a pillar of strength, care, and bold confidence in our family. Keep conquering Italy, keep shining your light, and know that we are cheering for you always back home in Uganda.</p>
-        <p class="letter-signature">With lots of love,<br><strong>Davies Marvin Sengonzi</strong></p>
+        <p>Happy 29th Birthday! You gave me such a meaningful, generous, and unforgettable gift on my birthday—the HP laptop that has truly changed my daily life. It has been my main tool for my campus studies, my work, and every single project I take on.</p>
+        <p>I didn't have money to buy a physical gift or send cash to Italy, but I wanted to show you what wonderful work is being done with the gift you gave me. Every single line of code, every pixel, and every animation on this webpage was built right here on that laptop, specifically for you.</p>
+        <p>You are a pillar of strength, care, and bold confidence in our family. Keep conquering Italy, keep shining your light, and know that we love and miss you deeply back home in Uganda.</p>
+        <p class="letter-signature">With all my love,<br><strong>Davies Marvin Sengonzi</strong></p>
       </div>
     </section>
 
