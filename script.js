@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const giftModal = document.getElementById("gift-modal");
   const mainContent = document.getElementById("main-content");
   
-  const music1 = document.getElementById("bg-music-1");
-  const music2 = document.getElementById("bg-music-2");
+  // Single Audio Engine to bypass browser autoplay/switching blocks
+  const bgMusic = document.getElementById("bg-music-1");
   const musicBtn = document.getElementById("music-toggle-btn");
 
   const candle = document.getElementById("candle");
@@ -12,94 +12,79 @@ document.addEventListener("DOMContentLoaded", () => {
   const cakeStatus = document.getElementById("cake-status-text");
   const deniseVideo = document.getElementById("denise-video");
 
-  let currentTrack = 1;
+  // Playlist array
+  const playlist = [
+    "./assets/birthday_song.mp3",
+    "./assets/birthday-song2.mp3"
+  ];
+  let currentTrackIndex = 0;
   let isPlaying = false;
 
   // ==========================================
-  // 1. DUAL AUDIO PLAYLIST SYSTEM WITH CROSSFADE
+  // 1. PLAYLIST ENGINE (SWITCHES TRACKS RELIABLY)
   // ==========================================
-  function playTrack(trackNum) {
-    if (trackNum === 1) {
-      music2.pause();
-      music2.currentTime = 0;
-      music1.volume = 1.0;
-      music1.play().catch(err => console.log("Autoplay check:", err));
-      currentTrack = 1;
-    } else {
-      music1.pause();
-      music1.currentTime = 0;
-      music2.volume = 1.0;
-      music2.play().catch(err => console.log("Autoplay check:", err));
-      currentTrack = 2;
-    }
-    isPlaying = true;
-    musicBtn.innerText = "🎵 Pause Music";
+  function startAudio() {
+    bgMusic.src = playlist[currentTrackIndex];
+    bgMusic.volume = 1.0;
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      if (musicBtn) musicBtn.innerText = "🎵 Pause Music";
+    }).catch(err => console.log("Audio play error:", err));
   }
 
-  // Crossfade transition when song 1 ends -> transition to song 2
-  music1.addEventListener("ended", () => {
-    fadeCrossTrack(music1, music2, 2);
-  });
-
-  // Crossfade transition when song 2 ends -> loop back to song 1
-  music2.addEventListener("ended", () => {
-    fadeCrossTrack(music2, music1, 1);
-  });
-
-  function fadeCrossTrack(activeAudio, nextAudio, nextTrackNum) {
-    let fadeInterval = setInterval(() => {
-      if (activeAudio.volume > 0.1) {
-        activeAudio.volume -= 0.1;
-      } else {
-        clearInterval(fadeInterval);
-        activeAudio.pause();
-        activeAudio.currentTime = 0;
-        playTrack(nextTrackNum);
-      }
-    }, 150);
+  // When current track ends, advance to next track automatically
+  if (bgMusic) {
+    bgMusic.addEventListener("ended", () => {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length; // Loops back to 0 after last track
+      bgMusic.src = playlist[currentTrackIndex];
+      bgMusic.play().catch(err => console.log("Track transition error:", err));
+    });
   }
 
   // Toggle button for audio playback
-  musicBtn.addEventListener("click", () => {
-    const activeAudio = currentTrack === 1 ? music1 : music2;
-    if (isPlaying) {
-      activeAudio.pause();
-      musicBtn.innerText = "🎵 Play Music";
-      isPlaying = false;
-    } else {
-      activeAudio.play();
-      musicBtn.innerText = "🎵 Pause Music";
-      isPlaying = true;
-    }
-  });
+  if (musicBtn) {
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.innerText = "🎵 Play Music";
+        isPlaying = false;
+      } else {
+        bgMusic.play();
+        musicBtn.innerText = "🎵 Pause Music";
+        isPlaying = true;
+      }
+    });
+  }
 
   // ==========================================
   // 2. GIFT BOX UNWRAPPING INTERACTION
   // ==========================================
-  giftBox.addEventListener("click", () => {
-    giftBox.classList.add("opened");
-    
-    // Start playlist
-    playTrack(1);
+  if (giftBox) {
+    giftBox.addEventListener("click", () => {
+      giftBox.classList.add("opened");
+      
+      // Start playlist on explicit user click
+      startAudio();
 
-    // Launch initial celebratory dense confetti burst
-    launchConfetti(300);
+      // Launch initial celebratory confetti burst
+      launchConfetti(300);
 
-    // Reveal main page after gift lid opens
-    setTimeout(() => {
-      giftModal.classList.add("hidden");
-      mainContent.classList.remove("content-hidden");
-      startSparkles();
-      initScrollReveal();
-    }, 700);
-  });
+      // Reveal main page after gift lid opens
+      setTimeout(() => {
+        if (giftModal) giftModal.classList.add("hidden");
+        if (mainContent) mainContent.classList.remove("content-hidden");
+        startSparkles();
+        initScrollReveal();
+      }, 700);
+    });
+  }
 
   // ==========================================
   // 3. VIDEO POSTER RESET ON FINISH
   // ==========================================
   if (deniseVideo) {
     deniseVideo.addEventListener("ended", () => {
-      deniseVideo.load(); // Reloads video element to reset back to cover photo/poster
+      deniseVideo.load(); // Reloads video element to reset back to cover photo
     });
   }
 
@@ -164,10 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // 7. DENSE CONFETTI CANVAS ENGINE
   // ==========================================
   const confettiCanvas = document.getElementById("confetti-canvas");
-  const ctx = confettiCanvas.getContext("2d");
+  const ctx = confettiCanvas ? confettiCanvas.getContext("2d") : null;
   let particles = [];
 
   function resizeCanvas() {
+    if (!confettiCanvas) return;
     confettiCanvas.width = window.innerWidth;
     confettiCanvas.height = window.innerHeight;
   }
@@ -175,6 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resizeCanvas();
 
   function launchConfetti(count = 200) {
+    if (!confettiCanvas || !ctx) return;
     const colors = ["#ffd700", "#8a2be2", "#b15eff", "#ffffff", "#ff69b4", "#ff4500"];
     for (let i = 0; i < count; i++) {
       particles.push({
@@ -194,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function animateConfetti() {
+    if (!ctx) return;
     ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
     particles.forEach((p, idx) => {
       p.x += p.vx;
@@ -221,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   function startSparkles() {
     const canvas = document.getElementById("sparkle-canvas");
+    if (!canvas) return;
     const sCtx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
