@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================================
-  // 6. SMOOTH SCROLL REVEAL OBSERVER
+  // 6. CONTINUOUS SMOOTH SCROLL REVEAL OBSERVER
   // ==========================================
   function initScrollReveal() {
     const revealElements = document.querySelectorAll(".reveal-on-scroll");
@@ -138,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+        } else {
+          // Removes class when out of view so it animates continuously whenever scrolled past!
+          entry.target.classList.remove("visible");
         }
       });
     }, { threshold: 0.15 });
